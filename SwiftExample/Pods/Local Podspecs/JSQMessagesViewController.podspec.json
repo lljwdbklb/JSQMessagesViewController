@@ -16,7 +16,7 @@
     "https://raw.githubusercontent.com/jessesquires/JSQMessagesViewController/develop/Screenshots/screenshot3.png"
   ],
   "source": {
-    "git": "https://github.com/jessesquires/JSQMessagesViewController.git",
+    "git": "https://github.com/0xPr0xy/JSQMessagesViewController.git",
     "tag": "7.3.4"
   },
   "source_files": "JSQMessagesViewController/**/*.{h,m}",

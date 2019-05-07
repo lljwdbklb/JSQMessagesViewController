@@ -994,6 +994,10 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
         return;
     }
 
+    if (!self.inputToolbar.contentView.textView.isFirstResponder) {
+        return;
+    }
+
     UIViewAnimationCurve animationCurve = [userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
     NSInteger animationCurveOption = (animationCurve << 16);
 

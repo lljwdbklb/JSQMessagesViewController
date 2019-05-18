@@ -34,7 +34,7 @@
 #import "NSBundle+JSQMessages.h"
 
 #import <objc/runtime.h>
-
+#define k_jsq_IPhoneX (UIApplication.sharedApplication.statusBarFrame.size.height >= 44)
 
 // Fixes rdar://26295020
 // See issue #1247 and Peter Steinberger's comment:
@@ -989,7 +989,11 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     NSDictionary *userInfo = [notification userInfo];
 
     CGRect keyboardEndFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGRect keyboardBeginFrame = [userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
 
+    BOOL show = (CGRectGetHeight(keyboardEndFrame) - CGRectGetHeight(keyboardBeginFrame)) > 0;
+
+    CGFloat bottomValue = show ? (CGRectGetHeight(keyboardEndFrame) - (k_jsq_IPhoneX ? 34 : 0)) : 44;
     if (CGRectIsNull(keyboardEndFrame)) {
         return;
     }
@@ -1009,7 +1013,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
                      animations:^{
                          const UIEdgeInsets insets = self.additionalContentInset;
                          [self jsq_setCollectionViewInsetsTopValue:insets.top
-                                                       bottomValue:CGRectGetHeight(keyboardEndFrame) + insets.bottom];
+                                                       bottomValue:bottomValue + insets.bottom];
                      }
                      completion:nil];
 }

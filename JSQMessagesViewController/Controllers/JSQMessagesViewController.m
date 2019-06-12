@@ -991,7 +991,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     CGRect keyboardEndFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGRect keyboardBeginFrame = [userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
 
-    BOOL show = !(CGRectGetMaxY(keyboardEndFrame) < CGRectGetMaxY(keyboardBeginFrame));
+    BOOL show = !(CGRectGetMaxY(keyboardEndFrame) < CGRectGetMaxY(keyboardBeginFrame)) || (CGRectGetHeight(keyboardEndFrame) == CGRectGetHeight(keyboardBeginFrame));
 
     CGFloat bottomValue = show ? (CGRectGetHeight(keyboardEndFrame) - (k_jsq_IPhoneX ? 34 : 0)) : 44;
     if (CGRectIsNull(keyboardEndFrame)) {
